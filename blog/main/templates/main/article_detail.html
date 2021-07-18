@@ -5,11 +5,18 @@
 {% block content %}
 <br/>
 <h1>{{ post.title }}</h1>
-<small>Author: {{ post.author.first_name }} {{ post.author.last_name }}</small><br/>
+<p><b>{{ post.title_tag }}</b></p>
+<hr>
+<small>Author: <b>{{ post.author.first_name }} {{ post.author.last_name }}</b>  -  {{ post.publication_date }}</small><br/>
 <hr>
 
 {{ post.body }}
 
-<br><br/>
-<a href="{% url 'home' %}"><button type="button" class="btn btn-outline-dark">Go Back</button></a>
+
+<hr>
+<a href="{% url 'home' %}"><button type="button" class="btn btn-dark">Go Back</button></a>
+<a href="{% url 'edit_post' post.pk %}"><button type="button" class="btn btn-outline-info"><i class="fas fa-edit"></i></button></a>
+<a href="{% url 'delete_post' post.pk %}"><button type="button" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button></a>
+
+<br>
 {% endblock %}

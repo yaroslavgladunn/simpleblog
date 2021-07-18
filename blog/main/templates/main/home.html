@@ -3,13 +3,13 @@
 
 {% block content %}
 <br/>
-<h3>Post</h3>
+<h3>Posts</h3>
 
 {% for post in object_list %}
 <ul>
     <li><a href="{% url 'article-detail' post.pk %}"><b>{{ post.title }}</b></a> - {{ post.author.first_name }}
         {{ post.author.last_name }}<br/>
-{{ post.body }}</li>
+{{ post.title_tag }}</li>
 </ul>
 {% endfor %}
 {% endblock %}
