@@ -1,0 +1,15 @@
+{% extends 'main/index.html' %}
+
+{% block title %}{{ post.title }} - Personal Blogg!{% endblock %}
+
+{% block content %}
+<br/>
+<h1>{{ post.title }}</h1>
+<small>Author: {{ post.author.first_name }} {{ post.author.last_name }}</small><br/>
+<hr>
+
+{{ post.body }}
+
+<br><br/>
+<a href="{% url 'home' %}"><button type="button" class="btn btn-outline-dark">Go Back</button></a>
+{% endblock %}
