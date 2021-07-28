@@ -1,0 +1,26 @@
+{% extends 'main/index.html' %}
+
+{% block title %}Categories - CIRCLE!{% endblock %}
+
+{% block content %}
+
+{% if category_posts %}
+<h3>{{ cats }}</h3>
+<hr>
+<ul>{% for post in category_posts %}
+    <li>
+        <p><a href="{% url 'article-detail' post.pk %}"><b>{{ post.title }}</b></a>  <b>·</b>  <small><a href="{% url 'profile_page' post.author.profile.id %}">{{ post.author.first_name }}
+            {{ post.author.last_name }}</a></small>
+            <br/>
+        {{ post.title_tag }}</p>
+
+    </li>
+</ul>
+{% endfor %}
+
+{% else %}
+<h4><b>Oops, seems like there's no articles in <b>{{ cats }}</b>! Become the first one to <a href="{% url 'add-post' %}">write something</a>.</b></h4>
+{% endif %}
+<hr>
+<a href="{{request.META.HTTP_REFERER}}"><button type="button" class="btn btn-outline-dark">Go Back</button></a>
+{% endblock %}

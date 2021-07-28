@@ -1,0 +1,23 @@
+{% extends 'main/index.html' %}
+
+{% block title %}Settings{% endblock %}
+
+{% block content %}
+
+<div>
+    <h1>Settings</h1>
+</div>
+<br>
+
+<div class="form-group">
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <a href="{{request.META.HTTP_REFERER}}"><button type="button" class="btn btn-outline-dark">Go Back</button></a>
+    <button class="btn btn-success">Change Settings</button>
+    </form>
+</div>
+
+
+{% endblock %}

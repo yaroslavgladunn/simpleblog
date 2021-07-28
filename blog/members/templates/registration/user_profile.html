@@ -1,0 +1,100 @@
+{% extends 'main/index.html' %}
+{% load static %}
+
+{% block title %}{{ page_user.user.first_name }} {{ page_user.user.last_name }} - Profile Page{% endblock %}
+{% block content %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+<div class="container">
+<div class="row">
+    <div class="col-lg-4 col-xl-4">
+        <div class="card-box text-center">
+			{% if page_user.profile_pic %}
+            <img src="{{ page_user.profile_pic.url }}" class="rounded-circle avatar-xl img-thumbnail" width="150"  alt="profile-image">
+			{% else %}
+            <img src="{% static 'main/img/blank-avatar.png' %}" class="rounded-circle avatar-xl img-thumbnail" width="150" alt="profile-image">
+        	{% endif %}
+            <br>
+            <h4 class="mb-0"><strong>{{ page_user.user.first_name }} {{ page_user.user.last_name }}</strong></h4>
+            <p class="text-muted">@{{ page_user.user.username }}</p>
+
+            {% if user.id == profile.user.id %}
+            <a href="{% url 'edit_profile_page' user.profile.id %}"><button type="button" class="btn btn-outline-info"><i class="fas fa-user-edit"></i> Edit Profile</button></a>&#160;
+            <a href="{% url 'edit_profile' %}"><button type="button" class="btn btn-outline-secondary"><i class="fas fa-sliders-h"></i> Settings</button></a>
+            {% endif %}
+            <hr>
+            <div class="text-left mt-3">
+                <p class="text-muted mb-1 font-13"><b>Username:</b> <span class="ml-2">@{{page_user.user.username}}</span></p>
+                <p class="text-muted mb-2 font-13"><b>Full Name:</b> <span class="ml-2">{{ page_user.user.first_name }} {{ page_user.user.last_name }}</span></p>
+                <p class="text-muted mb-1 font-13"><b>Country:</b> <span class="ml-2">{{page_user.country}}</span></p>
+                <p class="text-muted mb-2 font-13"><b>Email:</b> <span class="ml-2 ">{{page_user.user.email}}</span></p>
+            </div>
+            <hr>
+            <div class="text-left mt-3">
+            <h4 class="font-13 text-capitalize">Links
+            <ul class="social-list list-inline mt-3 mb-0">
+                {% if page_user.facebook_url %}
+                <li class="list-inline-item">
+                    <a href="{{page_user.facebook_url}}" target="_blank" class="social-list-item border-purple text-purple"><i class="fab fa-facebook"></i></a>
+                </li>
+                {% endif %}
+                {% if page_user.twitter_url %}
+                <li class="list-inline-item">
+                    <a href="{{ page_user.twitter_url }}" target="_blank" class="social-list-item border-info text-info"><i class="fab fa-twitter"></i></a>
+                </li>
+                {% endif %}
+                {% if page_user.instagram_url %}
+                <li class="list-inline-item">
+                    <a href="{{ page_user.instagram_url }}" target="_blank" class="social-list-item border-info text-info"><i class="fab fa-instagram" style="color: #cf1919;"></i></a>
+                </li>
+                {% endif %}
+                {% if page_user.pinterest_url %}
+                <li class="list-inline-item">
+                    <a href="{{ page_user.pinterest_url }}" target="_blank" class="social-list-item border-info text-info"><i class="fab fa-pinterest" style="color: #cf1919;"></i></a>
+                </li>
+                {% endif %}
+                {% if page_user.website_url %}
+                <li class="list-inline-item">
+                    <a href="{{ page_user.website_url }}" target="_blank" class="social-list-item border-info text-info"><i class="fab fa-code" style="color: #53c276;"></i></a>
+                </li>
+                {% endif %}
+            </ul>
+            </h4>
+            </div>
+        </div>
+        <hr>
+        <a href="{{request.META.HTTP_REFERER}}"><button type="button" class="btn btn-outline-dark">Go Back</button></a><!-- end card-box -->
+
+
+    </div> <!-- end col-->
+
+    <div class="col-lg-8 col-xl-8">
+        <div class="card-box">
+            <br>
+            <div class="tab-content">
+
+                <div class="tab-pane show active" id="about-me">
+
+                    <h5 class="mb-4 text-uppercase">{{page_user.user.first_name}}'s circle experience!</h5>
+                    {% if user.id == profile.user.id %}
+                    <a href="{% url 'add-post' %}"><button type="button" class="btn btn-outline-success">Add Article</button></a>
+                    <hr>
+                    <h4 class="font-13 text-capitalize">{{page_user.user.first_name}}'s Biography:</h4>
+                    <p class="text-muted font-13 mb-3">{{ page_user.bio }}</p>
+                    {% else %}
+                    <hr>
+                    <h4 class="font-13 text-capitalize">{{page_user.user.first_name}}'s Biography:</h4>
+                    <p class="text-muted font-13 mb-3">{{ page_user.bio }}</p>
+                    {% endif %}
+
+
+            </div> <!-- end tab-content -->
+        </div> <!-- end card-box-->
+
+    </div> <!-- end col -->
+</div>
+</div>
+
+{% endblock %}
+

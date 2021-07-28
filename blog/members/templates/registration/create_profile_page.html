@@ -1,0 +1,27 @@
+{% extends 'main/index.html' %}
+
+{% block title %}Create New Profile Page - CIRCLE!{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+    <h3>Create Profile Page</h3>
+    <br/>
+    <div class="form-group">
+        <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+            <a href="{% url 'home' %}"><button type="button" class="btn btn-outline-dark">Go Back</button></a>
+            <button class="btn btn-success">Create Profile Page</button>
+        </form>
+    </div>
+
+
+
+{% else %}
+    <h3>You should <a href="{% url 'login' %}">login</a> before adding a post!</h3>
+{% endif %}
+
+
+{% endblock %}

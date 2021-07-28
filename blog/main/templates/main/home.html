@@ -4,13 +4,15 @@
 {% block content %}
 <br/>
 <h3>Posts</h3>
-
+<hr>
 {% for post in object_list %}
 <ul>
-    <li><a href="{% url 'article-detail' post.pk %}"><b>{{ post.title }}</b></a> - {{ post.author.first_name }}
-        {{ post.author.last_name }}<br/>
-{{ post.title_tag }}</li>
+    <li><a href="{% url 'article-detail' post.pk %}"><b>{{ post.title }}</b></a>  <b>·</b>  <small><a href="{% url 'profile_page' post.author.profile.id %}">{{ post.author.first_name }}
+        {{ post.author.last_name }}</a> <b>·</b>  <a href="{% url 'category' post.category %}">{{ post.category }}</a><br/></small>
+        {{ post.title_tag }}
+    </li>
 </ul>
 {% endfor %}
+
 {% endblock %}
 

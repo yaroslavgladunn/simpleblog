@@ -3,17 +3,24 @@
 {% block title %}{{ post.title }} - Edit{% endblock %}
 
 {% block content %}
-
+{% if user.is_authenticated %}
+{% if user.id == post.author.id %}
 <h3>Edit Post</h3>
 <br/>
 <div class="form-group">
     <form method="post">
     {% csrf_token %}
+    {{ form.media }}
     {{ form.as_p }}
 
         <a href="{% url 'home' %}"><button type="button" class="btn btn-outline-dark">Go Back</button></a>
-        <button class="btn btn-warning">Edit</button>
+        <button class="btn btn-warning">Confirm Changes</button>
     </form>
 </div>
-
+{% else %}
+<h3>Sorry, you can only edit the posts you <a href="{% url 'add-post' %}">write</a>!</h3>
+<hr>
+<a href="{{request.META.HTTP_REFERER}}"><button type="button" class="btn btn-outline-dark">Go Back</button></a>
+{% endif %}
+{% endif %}
 {% endblock %}
